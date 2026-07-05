@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="main-container fade-in">
+
+    <div class="result-header">
+        <h1 class="title">Predicted House Price</h1>
+
+        <div class="result-card">
+            <p><strong>📍 Location:</strong> {{ location }}</p>
+            <p><strong>📐 Sqft:</strong> {{ sqft }}</p>
+            <p><strong>🛏 BHK:</strong> {{ bhk }}</p>
+            <p><strong>🛁 Bathrooms:</strong> {{ bath }}</p>
+
+            <h2 class="predicted-price">₹ {{ price }}</h2>
+        </div>
+    </div>
+
+    <h2 class="title" style="margin-top:40px;">Recommended Similar Houses</h2>
+
+    {% if recommendations|length == 0 %}
+        <p class="empty-text">No similar houses found in this price range.</p>
+    {% else %}
+        <div class="rec-container">
+            {% for r in recommendations %}
+            <div class="rec-card">
+                <h3 class="rec-title">{{ r.location }}</h3>
+
+                <p class="rec-line">📐 {{ r.sqft }} sqft</p>
+                <p class="rec-line">🛏 {{ r.bhk }} BHK</p>
+                <p class="rec-line">🛁 {{ r.bath }} Bathrooms</p>
+
+                <p class="rec-price">₹ {{ r.price }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <a href="/" class="secondary-btn">⬅ Predict Another</a>
+
+</div>
+
+</body>
+</html>
